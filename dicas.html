@@ -5,63 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dicas — Jornada da Sustentabilidade</title>
     <style>
-        * {margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif;}
-        body {background:linear-gradient(135deg, #0f2027, #203a43, #2c5364); min-height:100vh; padding:20px; color:white;}
+        * {margin:0; padding:0; font-family:Arial, sans-serif;}
+        body {background:#1a2f38; color:white; padding:20px;}
         .container {max-width:900px; margin:0 auto;}
-        .nav {background:rgba(0,0,0,0.3); padding:12px; border-radius:8px; text-align:center; margin-bottom:25px;}
-        .nav a {color:#99f6e4; text-decoration:none; margin:4px; padding:6px 10px; border-radius:4px; display:inline-block;}
-        .nav a.ativo {background:rgba(34,197,94,0.3);}
-        h1 {text-align:center; margin-bottom:25px; color:#86efac;}
+        .nav {text-align:center; margin-bottom:30px;}
+        .nav a {color:#99f6e4; margin:8px; text-decoration:none;}
+        .nav a.ativo {color:#4ade80; font-weight:bold;}
+        h1 {text-align:center; margin-bottom:30px; color:#86efac;}
 
-        .filtros {text-align:center; margin-bottom:25px;}
-        .btn-filtro {
-            background:#444; color:white; border:none; padding:12px 20px; margin:5px;
-            border-radius:5px; font-size:16px; cursor:pointer; display:inline-block;
-        }
-        .btn-filtro.ativo {background:#22c55e;}
-        .btn-filtro:hover {background:#333;}
+        .filtros {text-align:center; margin-bottom:30px;}
+        button {padding:10px 15px; margin:5px; font-size:15px; border:none; border-radius:5px; cursor:pointer;}
+        .btn-todas {background:#22c55e; color:white;}
+        .btn-agua {background:#3b82f6; color:white;}
+        .btn-energia {background:#f59e0b; color:white;}
+        .btn-comida {background:#ef4444; color:white;}
+        .btn-lixo {background:#10b981; color:white;}
 
-        .grade {display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:20px; margin-bottom:40px;}
-        .card {
-            background:rgba(255,255,255,0.05); border-radius:10px; padding:20px;
-        }
-        .card h3 {margin-bottom:10px; color:#99f6e4; font-size:17px;}
-        .card p {font-size:14px; line-height:1.6; color:#ddd;}
-        .card.agua {border-left:4px solid #3b82f6;}
-        .card.energia {border-left:4px solid #f59e0b;}
-        .card.comida {border-left:4px solid #ef4444;}
-        .card.lixo {border-left:4px solid #22c55e;}
+        .card {background:rgba(255,255,255,0.05); padding:20px; margin:10px 0; border-radius:8px;}
+        .card h3 {margin-bottom:8px; color:#99f6e4;}
+        .linha-agua {border-left:4px solid #3b82f6;}
+        .linha-energia {border-left:4px solid #f59e0b;}
+        .linha-comida {border-left:4px solid #ef4444;}
+        .linha-lixo {border-left:4px solid #10b981;}
 
-        .calculadora {
-            background:rgba(255,255,255,0.05); border-radius:10px; padding:25px;
-        }
-        .calculadora h2 {font-size:20px; margin-bottom:20px; color:#99f6e4;}
-        .abas {display:flex; flex-wrap:wrap; gap:5px; margin-bottom:20px;}
-        .aba {
-            padding:12px 20px; background:#444; border:none; color:white; border-radius:5px;
-            cursor:pointer; font-size:16px; display:inline-block;
-        }
-        .aba.ativa {background:#22c55e;}
-        .aba:hover {background:#333;}
-        .conteudo-aba {display:none;}
-        .conteudo-aba.visivel {display:block;}
-
-        .grupo {margin-bottom:15px;}
-        label {display:block; margin-bottom:5px; font-size:15px; color:#ccc;}
-        input, select {
-            width:100%; padding:10px; border-radius:5px; border:none;
-            background:rgba(255,255,255,0.08); color:white; font-size:15px;
-        }
-        button.calcular {
-            background:#22c55e; color:white; border:none; padding:12px 25px;
-            border-radius:5px; font-size:16px; cursor:pointer; font-weight:bold; margin-top:10px;
-        }
-        button.calcular:hover {background:#16a34a;}
-        .resultado {
-            margin-top:15px; padding:15px; background:rgba(34,197,94,0.1);
-            border-radius:6px; font-size:15px; line-height:1.8;
-        }
-        .destaque {font-weight:bold; color:#4ade80; font-size:17px;}
+        .calculadora {margin-top:40px; padding:20px; background:rgba(255,255,255,0.05); border-radius:8px;}
+        input, select {padding:8px; margin:8px 0; width:100%; max-width:300px; border-radius:4px; border:none; background:rgba(255,255,255,0.1); color:white;}
+        .resultado {margin-top:15px; padding:10px; background:rgba(34,197,94,0.1); border-radius:4px;}
+        .destaque {color:#4ade80; font-weight:bold;}
     </style>
 </head>
 <body>
@@ -79,223 +49,85 @@
         <h1>💡 Dicas de Consumo Responsável</h1>
 
         <div class="filtros">
-            <button class="btn-filtro ativo" id="btn-todas">📂 Todas</button>
-            <button class="btn-filtro" id="btn-agua">💧 Água</button>
-            <button class="btn-filtro" id="btn-energia">⚡ Energia</button>
-            <button class="btn-filtro" id="btn-comida">🍎 Comida</button>
-            <button class="btn-filtro" id="btn-lixo">♻️ Resíduos</button>
+            <button class="btn-todas" onclick="mostrarTodas()">📂 Todas</button>
+            <button class="btn-agua" onclick="mostrarApenas('agua')">💧 Água</button>
+            <button class="btn-energia" onclick="mostrarApenas('energia')">⚡ Energia</button>
+            <button class="btn-comida" onclick="mostrarApenas('comida')">🍎 Comida</button>
+            <button class="btn-lixo" onclick="mostrarApenas('lixo')">♻️ Resíduos</button>
         </div>
 
-        <div class="grade" id="gradeDicas">
-            <div class="card agua">
+        <div id="todas-dicas">
+            <div class="card linha-agua" data-tipo="agua">
                 <h3>💧 Torneira Fechada</h3>
-                <p>Ao escovar os dentes ou ensaboar as mãos, feche a torneira. Em 5 minutos abertos, gastam-se até 12 litros de água!</p>
+                <p>Feche a torneira ao escovar os dentes. Em 5 minutos abertos, gastam-se até 12 litros de água!</p>
             </div>
-            <div class="card agua">
+            <div class="card linha-agua" data-tipo="agua">
                 <h3>💧 Banho Curto</h3>
-                <p>Cada minuto a menos no banho economiza cerca de 9 litros de água. Em um mês, faz muita diferença!</p>
+                <p>Cada minuto a menos no banho economiza cerca de 9 litros de água. Em um mês faz diferença!</p>
             </div>
-            <div class="card agua">
-                <h3>💧 Reutilize a Água</h3>
-                <p>Água da máquina de lavar pode ser usada para lavar pisos. A água da chuva serve para regar plantas!</p>
-            </div>
-            <div class="card agua">
-                <h3>💧 Conserte Vazamentos</h3>
-                <p>Uma torneira pingando 30 gotas por minuto desperdiça cerca de 45 litros por dia. Fique de olho!</p>
-            </div>
-
-            <div class="card energia">
+            <div class="card linha-energia" data-tipo="energia">
                 <h3>⚡ Apague as Luzes</h3>
-                <p>Ao sair de um ambiente, apague a luz. Pode parecer pouco, mas ao longo de um mês gera boa economia!</p>
+                <p>Ao sair de um ambiente, apague a luz. Faz diferença no fim do mês!</p>
             </div>
-            <div class="card energia">
+            <div class="card linha-energia" data-tipo="energia">
                 <h3>⚡ Desligue da Tomada</h3>
-                <p>Aparelhos em modo espera gastam até 15% a mais de energia. Desligue quando não estiver usando!</p>
+                <p>Aparelhos em modo espera gastam até 15% a mais de energia. Desligue quando não usar!</p>
             </div>
-            <div class="card energia">
-                <h3>⚡ Geladeira Inteligente</h3>
-                <p>Não coloque comida quente na geladeira e verifique a borracha da porta. Isso evita gasto extra!</p>
-            </div>
-            <div class="card energia">
-                <h3>⚡ Luz Natural</h3>
-                <p>Abra janelas e cortinas durante o dia. A luz do sol é grátis e faz bem para a saúde!</p>
-            </div>
-
-            <div class="card comida">
+            <div class="card linha-comida" data-tipo="comida">
                 <h3>🍎 Faça uma Lista</h3>
-                <p>Antes de ir às compras, faça uma lista. Comprar por impulso leva a desperdiçar depois!</p>
+                <p>Comprar sem lista leva a desperdício. Planeje suas compras!</p>
             </div>
-            <div class="card comida">
+            <div class="card linha-comida" data-tipo="comida">
                 <h3>🍎 Sobras = Nova Refeição</h3>
-                <p>Arroz vira bolinho, legumes viram sopa. Seja criativo e aproveite tudo!</p>
+                <p>Aproveite as sobras. Arroz vira bolinho, legumes viram sopa!</p>
             </div>
-            <div class="card comida">
-                <h3>🍎 Entenda a Validade</h3>
-                <p>"Melhor antes" ≠ "Estragado". Muitos alimentos ainda podem ser consumidos com segurança!</p>
-            </div>
-            <div class="card comida">
-                <h3>🍎 Sirva a Porção Certa</h3>
-                <p>Coloque no prato só o que vai comer. Sempre pode repetir, mas desperdiçar não dá!</p>
-            </div>
-
-            <div class="card lixo">
+            <div class="card linha-lixo" data-tipo="lixo">
                 <h3>♻️ Separe Certo</h3>
-                <p>Papel, plástico, vidro e metal vão para reciclagem. Orgânico pode virar adubo!</p>
+                <p>Papel, plástico, vidro e metal — cada um no seu lugar. A reciclagem começa em casa!</p>
             </div>
-            <div class="card lixo">
-                <h3>♻️ Prefira Sem Embalagem</h3>
-                <p>Leve sua sacola reutilizável. Evite produtos com embalagens excessivas. Menos lixo começa na compra!</p>
-            </div>
-            <div class="card lixo">
-                <h3>♻️ Compostagem</h3>
-                <p>Restos de frutas e cascas viram adubo rico para plantas! Até em apartamento dá para fazer em baldes.</p>
-            </div>
-            <div class="card lixo">
-                <h3>♻️ Reutilize Antes de Descartar</h3>
-                <p>Potes viram organizadores, roupas doadas, vidros reutilizados. Dê uma segunda vida aos objetos!</p>
+            <div class="card linha-lixo" data-tipo="lixo">
+                <h3>♻️ Reutilize</h3>
+                <p>Um pote vazio pode guardar outras coisas. Dê uma segunda vida aos objetos!</p>
             </div>
         </div>
 
         <div class="calculadora">
-            <h2>🧮 Calculadora de Impacto Pessoal</h2>
-            
-            <div class="abas">
-                <button class="aba ativa" id="abaAgua">💧 Água</button>
-                <button class="aba" id="abaEnergia">⚡ Energia</button>
-                <button class="aba" id="abaComida">🍎 Comida</button>
-                <button class="aba" id="abaResiduos">♻️ Resíduos</button>
-            </div>
-
-            <div class="conteudo-aba visivel" id="calcAgua">
-                <div class="grupo">
-                    <label>Tempo médio de banho (min):</label>
-                    <input type="number" id="banhoMin" placeholder="Ex: 15" min="1">
-                </div>
-                <div class="grupo">
-                    <label>Banhos por dia:</label>
-                    <input type="number" id="banhoDia" placeholder="Ex: 1" min="1">
-                </div>
-                <button class="calcular" id="btnCalcAgua">🔢 Calcular</button>
-                <div class="resultado" id="resAgua"></div>
-            </div>
-
-            <div class="conteudo-aba" id="calcEnergia">
-                <div class="grupo">
-                    <label>Conta de luz mensal (R$):</label>
-                    <input type="number" id="contaLuz" placeholder="Ex: 200" min="10">
-                </div>
-                <div class="grupo">
-                    <label>Lâmpadas acesas sem necessidade:</label>
-                    <input type="number" id="lampadasPerda" placeholder="Ex: 2" min="0">
-                </div>
-                <button class="calcular" id="btnCalcEnergia">🔢 Calcular</button>
-                <div class="resultado" id="resEnergia"></div>
-            </div>
-
-            <div class="conteudo-aba" id="calcComida">
-                <div class="grupo">
-                    <label>Gasto com comida por semana (R$):</label>
-                    <input type="number" id="gastoSemanaComida" placeholder="Ex: 150" min="0">
-                </div>
-                <div class="grupo">
-                    <label>Quanto você joga fora (%):</label>
-                    <select id="perdaComida">
-                        <option value="5">Menos de 5%</option>
-                        <option value="10">5% a 10%</option>
-                        <option value="20" selected>10% a 20%</option>
-                        <option value="30">20% a 30%</option>
-                        <option value="40">Mais de 30%</option>
-                    </select>
-                </div>
-                <button class="calcular" id="btnCalcComida">🔢 Calcular</button>
-                <div class="resultado" id="resComida"></div>
-            </div>
-
-            <div class="conteudo-aba" id="calcResiduos">
-                <div class="grupo">
-                    <label>Lixo produzido por dia (litros):</label>
-                    <input type="number" id="lixoDia" placeholder="Ex: 10" min="1">
-                </div>
-                <div class="grupo">
-                    <label>Separa para reciclagem?</label>
-                    <select id="separaRecicla">
-                        <option value="0">Não</option>
-                        <option value="0.3">Parcialmente</option>
-                        <option value="0.6" selected>Sim, a maioria</option>
-                        <option value="0.9">Sim, tudo direitinho!</option>
-                    </select>
-                </div>
-                <button class="calcular" id="btnCalcResiduos">🔢 Calcular</button>
-                <div class="resultado" id="resResiduos"></div>
-            </div>
+            <h2>🧮 Calculadora — Água</h2>
+            <label>Minutos no banho:</label>
+            <input type="number" id="min" placeholder="Ex: 15">
+            <br>
+            <button style="background:#22c55e; color:white;" onclick="calcular()">🔢 Calcular</button>
+            <div class="resultado" id="resultado"></div>
         </div>
     </div>
 
     <script>
-        // FILTROS
-        document.getElementById('btn-todas').onclick = function() {
-            var botoes = document.querySelectorAll('.btn-filtro');
-            for (var i = 0; i < botoes.length; i++) botoes[i].classList.remove('ativo');
-            this.classList.add('ativo');
-            var cards = document.querySelectorAll('.card');
-            for (var i = 0; i < cards.length; i++) cards[i].style.display = 'block';
-        };
-
-        document.getElementById('btn-agua').onclick = function() {
-            var botoes = document.querySelectorAll('.btn-filtro');
-            for (var i = 0; i < botoes.length; i++) botoes[i].classList.remove('ativo');
-            this.classList.add('ativo');
-            var cards = document.querySelectorAll('.card');
-            for (var i = 0; i < cards.length; i++) {
-                cards[i].style.display = cards[i].classList.contains('agua') ? 'block' : 'none';
+        function mostrarTodas() {
+            var todos = document.querySelectorAll('.card');
+            for (var i = 0; i < todos.length; i++) {
+                todos[i].style.display = 'block';
             }
-        };
+        }
 
-        document.getElementById('btn-energia').onclick = function() {
-            var botoes = document.querySelectorAll('.btn-filtro');
-            for (var i = 0; i < botoes.length; i++) botoes[i].classList.remove('ativo');
-            this.classList.add('ativo');
-            var cards = document.querySelectorAll('.card');
-            for (var i = 0; i < cards.length; i++) {
-                cards[i].style.display = cards[i].classList.contains('energia') ? 'block' : 'none';
+        function mostrarApenas(tipo) {
+            var todos = document.querySelectorAll('.card');
+            for (var i = 0; i < todos.length; i++) {
+                if (todos[i].getAttribute('data-tipo') === tipo) {
+                    todos[i].style.display = 'block';
+                } else {
+                    todos[i].style.display = 'none';
+                }
             }
-        };
+        }
 
-        document.getElementById('btn-comida').onclick = function() {
-            var botoes = document.querySelectorAll('.btn-filtro');
-            for (var i = 0; i < botoes.length; i++) botoes[i].classList.remove('ativo');
-            this.classList.add('ativo');
-            var cards = document.querySelectorAll('.card');
-            for (var i = 0; i < cards.length; i++) {
-                cards[i].style.display = cards[i].classList.contains('comida') ? 'block' : 'none';
-            }
-        };
-
-        document.getElementById('btn-lixo').onclick = function() {
-            var botoes = document.querySelectorAll('.btn-filtro');
-            for (var i = 0; i < botoes.length; i++) botoes[i].classList.remove('ativo');
-            this.classList.add('ativo');
-            var cards = document.querySelectorAll('.card');
-            for (var i = 0; i < cards.length; i++) {
-                cards[i].style.display = cards[i].classList.contains('lixo') ? 'block' : 'none';
-            }
-        };
-
-        // ABAS DA CALCULADORA
-        document.getElementById('abaAgua').onclick = function() {
-            document.getElementById('calcAgua').classList.add('visivel');
-            document.getElementById('calcEnergia').classList.remove('visivel');
-            document.getElementById('calcComida').classList.remove('visivel');
-            document.getElementById('calcResiduos').classList.remove('visivel');
-            var abas = document.querySelectorAll('.aba');
-            for (var i = 0; i < abas.length; i++) abas[i].classList.remove('ativa');
-            this.classList.add('ativa');
-        };
-
-        document.getElementById('abaEnergia').onclick = function() {
-            document.getElementById('calcAgua').classList.remove('visivel');
-            document.getElementById('calcEnergia').classList.add('visivel');
-            document.getElementById('calcComida').classList.remove('visivel');
-            document.getElementById('calcResiduos').classList.remove('visivel');
-            var abas = document.querySelectorAll('.aba');
-            for (var i = 0; i < abas.length; i++) abas[i].classList.remove('ativa
+        function calcular() {
+            var min = parseInt(document.getElementById('min').value) || 0;
+            var porMes = min * 9 * 30;
+            var economia = Math.round(porMes * 0.3);
+            document.getElementById('resultado').innerHTML =
+                'Você gasta cerca de <span class="destaque">' + porMes + ' litros</span>/mês.<br>' +
+                'Reduzindo 5min = economiza <span class="destaque">' + economia + ' L</span>/mês!';
+        }
+    </script>
+</body>
+</html>
