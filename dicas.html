@@ -76,78 +76,78 @@
         <h1>💡 Dicas de Consumo Responsável</h1>
 
         <div class="filtros">
-            <button class="btn-filtro ativo" id="btn-todas">📂 Todas</button>
-            <button class="btn-filtro" id="btn-agua">💧 Água</button>
-            <button class="btn-filtro" id="btn-energia">⚡ Energia</button>
-            <button class="btn-filtro" id="btn-comida">🍎 Comida</button>
-            <button class="btn-filtro" id="btn-lixo">♻️ Resíduos</button>
+            <button class="btn-filtro ativo" onclick="mostrarTodas()">📂 Todas</button>
+            <button class="btn-filtro" onclick="mostrarAgua()">💧 Água</button>
+            <button class="btn-filtro" onclick="mostrarEnergia()">⚡ Energia</button>
+            <button class="btn-filtro" onclick="mostrarComida()">🍎 Comida</button>
+            <button class="btn-filtro" onclick="mostrarLixo()">♻️ Resíduos</button>
         </div>
 
         <div class="grade" id="gradeDicas">
-            <div class="card agua" data-cat="agua">
+            <div class="card agua">
                 <h3>💧 Torneira Fechada</h3>
                 <p>Ao escovar os dentes ou ensaboar as mãos, feche a torneira. Em 5 minutos abertos, gastam-se até 12 litros de água!</p>
             </div>
-            <div class="card agua" data-cat="agua">
+            <div class="card agua">
                 <h3>💧 Banho Curto</h3>
                 <p>Cada minuto a menos no banho economiza cerca de 9 litros de água. Em um mês, faz muita diferença!</p>
             </div>
-            <div class="card agua" data-cat="agua">
+            <div class="card agua">
                 <h3>💧 Reutilize a Água</h3>
                 <p>Água da máquina de lavar pode ser usada para lavar pisos. A água da chuva serve para regar plantas!</p>
             </div>
-            <div class="card agua" data-cat="agua">
+            <div class="card agua">
                 <h3>💧 Conserte Vazamentos</h3>
                 <p>Uma torneira pingando 30 gotas por minuto desperdiça cerca de 45 litros por dia. Fique de olho!</p>
             </div>
 
-            <div class="card energia" data-cat="energia">
+            <div class="card energia">
                 <h3>⚡ Apague as Luzes</h3>
                 <p>Ao sair de um ambiente, apague a luz. Pode parecer pouco, mas ao longo de um mês gera boa economia!</p>
             </div>
-            <div class="card energia" data-cat="energia">
+            <div class="card energia">
                 <h3>⚡ Desligue da Tomada</h3>
                 <p>Aparelhos em modo espera gastam até 15% a mais de energia. Desligue quando não estiver usando!</p>
             </div>
-            <div class="card energia" data-cat="energia">
+            <div class="card energia">
                 <h3>⚡ Geladeira Inteligente</h3>
                 <p>Não coloque comida quente na geladeira e verifique a borracha da porta. Isso evita gasto extra!</p>
             </div>
-            <div class="card energia" data-cat="energia">
+            <div class="card energia">
                 <h3>⚡ Luz Natural</h3>
                 <p>Abra janelas e cortinas durante o dia. A luz do sol é grátis e faz bem para a saúde!</p>
             </div>
 
-            <div class="card comida" data-cat="comida">
+            <div class="card comida">
                 <h3>🍎 Faça uma Lista</h3>
                 <p>Antes de ir às compras, faça uma lista. Comprar por impulso leva a desperdiçar depois!</p>
             </div>
-            <div class="card comida" data-cat="comida">
+            <div class="card comida">
                 <h3>🍎 Sobras = Nova Refeição</h3>
                 <p>Arroz vira bolinho, legumes viram sopa. Seja criativo e aproveite tudo!</p>
             </div>
-            <div class="card comida" data-cat="comida">
+            <div class="card comida">
                 <h3>🍎 Entenda a Validade</h3>
                 <p>"Melhor antes" ≠ "Estragado". Muitos alimentos ainda podem ser consumidos com segurança!</p>
             </div>
-            <div class="card comida" data-cat="comida">
+            <div class="card comida">
                 <h3>🍎 Sirva a Porção Certa</h3>
                 <p>Coloque no prato só o que vai comer. Sempre pode repetir, mas desperdiçar não dá!</p>
             </div>
 
-            <div class="card lixo" data-cat="lixo">
+            <div class="card lixo">
                 <h3>♻️ Separe Certo</h3>
                 <p>Papel, plástico, vidro e metal vão para reciclagem. Orgânico pode virar adubo!</p>
             </div>
-            <div class="card lixo" data-cat="lixo">
+            <div class="card lixo">
                 <h3>♻️ Prefira Sem Embalagem</h3>
                 <p>Leve sua sacola reutilizável. Evite produtos com embalagens excessivas. Menos lixo começa na compra!</p>
             </div>
-            <div class="card lixo" data-cat="lixo">
+            <div class="card lixo">
                 <h3>♻️ Compostagem</h3>
                 <p>Restos de frutas e cascas viram adubo rico para plantas! Até em apartamento dá para fazer em baldes.</p>
             </div>
-            <div class="card lixo" data-cat="lixo">
+            <div class="card lixo">
                 <h3>♻️ Reutilize Antes de Descartar</h3>
                 <p>Potes viram organizadores, roupas doadas, vidros reutilizados. Dê uma segunda vida aos objetos!</p>
             </div>
@@ -157,10 +157,10 @@
             <h2>🧮 Calculadora de Impacto Pessoal</h2>
             
             <div class="abas">
-                <button class="aba ativa" id="abaAgua">💧 Água</button>
-                <button class="aba" id="abaEnergia">⚡ Energia</button>
-                <button class="aba" id="abaComida">🍎 Comida</button>
-                <button class="aba" id="abaResiduos">♻️ Resíduos</button>
+                <button class="aba ativa" onclick="mostrarCalcAgua()">💧 Água</button>
+                <button class="aba" onclick="mostrarCalcEnergia()">⚡ Energia</button>
+                <button class="aba" onclick="mostrarCalcComida()">🍎 Comida</button>
+                <button class="aba" onclick="mostrarCalcResiduos()">♻️ Resíduos</button>
             </div>
 
             <div class="conteudo-aba visivel" id="calcAgua">
@@ -172,7 +172,7 @@
                     <label>Banhos por dia:</label>
                     <input type="number" id="banhoDia" placeholder="Ex: 1" min="1">
                 </div>
-                <button class="calcular" id="btnCalcAgua">🔢 Calcular</button>
+                <button class="calcular" onclick="calcularAgua()">🔢 Calcular</button>
                 <div class="resultado" id="resAgua"></div>
             </div>
 
@@ -185,7 +185,7 @@
                     <label>Lâmpadas acesas sem necessidade:</label>
                     <input type="number" id="lampadasPerda" placeholder="Ex: 2" min="0">
                 </div>
-                <button class="calcular" id="btnCalcEnergia">🔢 Calcular</button>
+                <button class="calcular" onclick="calcularEnergia()">🔢 Calcular</button>
                 <div class="resultado" id="resEnergia"></div>
             </div>
 
@@ -204,7 +204,7 @@
                         <option value="40">Mais de 30%</option>
                     </select>
                 </div>
-                <button class="calcular" id="btnCalcComida">🔢 Calcular</button>
+                <button class="calcular" onclick="calcularComida()">🔢 Calcular</button>
                 <div class="resultado" id="resComida"></div>
             </div>
 
@@ -222,81 +222,76 @@
                         <option value="0.9">Sim, tudo direitinho!</option>
                     </select>
                 </div>
-                <button class="calcular" id="btnCalcResiduos">🔢 Calcular</button>
+                <button class="calcular" onclick="calcularResiduos()">🔢 Calcular</button>
                 <div class="resultado" id="resResiduos"></div>
             </div>
         </div>
     </div>
 
     <script>
-        // FILTROS DE DICAS
-        document.getElementById('btn-todas').onclick = function() {
-            document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('ativo'));
-            this.classList.add('ativo');
-            document.querySelectorAll('.card').forEach(c => c.style.display = 'block');
-        };
+        function mostrarTodas() {
+            var botoes = document.querySelectorAll('.btn-filtro');
+            for (var i = 0; i < botoes.length; i++) botoes[i].classList.remove('ativo');
+            event.target.classList.add('ativo');
+            var cards = document.querySelectorAll('.card');
+            for (var i = 0; i < cards.length; i++) cards[i].style.display = 'block';
+        }
+        function mostrarAgua() {
+            var botoes = document.querySelectorAll('.btn-filtro');
+            for (var i = 0; i < botoes.length; i++) botoes[i].classList.remove('ativo');
+            event.target.classList.add('ativo');
+            var cards = document.querySelectorAll('.card');
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].style.display = cards[i].classList.contains('agua') ? 'block' : 'none';
+            }
+        }
+        function mostrarEnergia() {
+            var botoes = document.querySelectorAll('.btn-filtro');
+            for (var i = 0; i < botoes.length; i++) botoes[i].classList.remove('ativo');
+            event.target.classList.add('ativo');
+            var cards = document.querySelectorAll('.card');
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].style.display = cards[i].classList.contains('energia') ? 'block' : 'none';
+            }
+        }
+        function mostrarComida() {
+            var botoes = document.querySelectorAll('.btn-filtro');
+            for (var i = 0; i < botoes.length; i++) botoes[i].classList.remove('ativo');
+            event.target.classList.add('ativo');
+            var cards = document.querySelectorAll('.card');
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].style.display = cards[i].classList.contains('comida') ? 'block' : 'none';
+            }
+        }
+        function mostrarLixo() {
+            var botoes = document.querySelectorAll('.btn-filtro');
+            for (var i = 0; i < botoes.length; i++) botoes[i].classList.remove('ativo');
+            event.target.classList.add('ativo');
+            var cards = document.querySelectorAll('.card');
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].style.display = cards[i].classList.contains('lixo') ? 'block' : 'none';
+            }
+        }
 
-        document.getElementById('btn-agua').onclick = function() {
-            document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('ativo'));
-            this.classList.add('ativo');
-            document.querySelectorAll('.card').forEach(c => {
-                c.style.display = c.getAttribute('data-cat') === 'agua' ? 'block' : 'none';
-            });
-        };
-
-        document.getElementById('btn-energia').onclick = function() {
-            document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('ativo'));
-            this.classList.add('ativo');
-            document.querySelectorAll('.card').forEach(c => {
-                c.style.display = c.getAttribute('data-cat') === 'energia' ? 'block' : 'none';
-            });
-        };
-
-        document.getElementById('btn-comida').onclick = function() {
-            document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('ativo'));
-            this.classList.add('ativo');
-            document.querySelectorAll('.card').forEach(c => {
-                c.style.display = c.getAttribute('data-cat') === 'comida' ? 'block' : 'none';
-            });
-        };
-
-        document.getElementById('btn-lixo').onclick = function() {
-            document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('ativo'));
-            this.classList.add('ativo');
-            document.querySelectorAll('.card').forEach(c => {
-                c.style.display = c.getAttribute('data-cat') === 'lixo' ? 'block' : 'none';
-            });
-        };
-
-        // ABAS DA CALCULADORA
-        document.getElementById('abaAgua').onclick = function() {
-            document.querySelectorAll('.conteudo-aba').forEach(a => a.classList.remove('visivel'));
-            document.querySelectorAll('.aba').forEach(b => b.classList.remove('ativa'));
+        function mostrarCalcAgua() {
             document.getElementById('calcAgua').classList.add('visivel');
-            this.classList.add('ativa');
-        };
-
-        document.getElementById('abaEnergia').onclick = function() {
-            document.querySelectorAll('.conteudo-aba').forEach(a => a.classList.remove('visivel'));
-            document.querySelectorAll('.aba').forEach(b => b.classList.remove('ativa'));
+            document.getElementById('calcEnergia').classList.remove('visivel');
+            document.getElementById('calcComida').classList.remove('visivel');
+            document.getElementById('calcResiduos').classList.remove('visivel');
+            var abas = document.querySelectorAll('.aba');
+            for (var i = 0; i < abas.length; i++) abas[i].classList.remove('ativa');
+            event.target.classList.add('ativa');
+        }
+        function mostrarCalcEnergia() {
+            document.getElementById('calcAgua').classList.remove('visivel');
             document.getElementById('calcEnergia').classList.add('visivel');
-            this.classList.add('ativa');
-        };
-
-        document.getElementById('abaComida').onclick = function() {
-            document.querySelectorAll('.conteudo-aba').forEach(a => a.classList.remove('visivel'));
-            document.querySelectorAll('.aba').forEach(b => b.classList.remove('ativa'));
-            document.getElementById('calcComida').classList.add('visivel');
-            this.classList.add('ativa');
-        };
-
-        document.getElementById('abaResiduos').onclick = function() {
-            document.querySelectorAll('.conteudo-aba').forEach(a => a.classList.remove('visivel'));
-            document.querySelectorAll('.aba').forEach(b => b.classList.remove('ativa'));
-            document.getElementById('calcResiduos').classList.add('visivel');
-            this.classList.add('ativa');
-        };
-
-        // CÁLCULOS
-        document.getElementById('btnCalcAgua').onclick = function() {
-           
+            document.getElementById('calcComida').classList.remove('visivel');
+            document.getElementById('calcResiduos').classList.remove('visivel');
+            var abas = document.querySelectorAll('.aba');
+            for (var i = 0; i < abas.length; i++) abas[i].classList.remove('ativa');
+            event.target.classList.add('ativa');
+        }
+        function mostrarCalcComida() {
+            document.getElementById('calcAgua').classList.remove('visivel');
+            document.getElementById('calcEnergia').classList.remove('visivel');
+            document.getElementById('calcCom
