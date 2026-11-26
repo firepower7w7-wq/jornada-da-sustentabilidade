@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Economia de Recursos — Jornada da Sustentabilidade</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); min-height: 100vh; padding: 15px; color: #fff; line-height: 1.7; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .nav { background: rgba(0,0,0,0.25); padding: 15px; border-radius: 12px; text-align: center; margin-bottom: 30px; position: sticky; top: 0; backdrop-filter: blur(5px); }
+        .nav a { color: #99f6e4; text-decoration: none; margin: 5px 6px; padding: 8px 10px; border-radius: 6px; display: inline-block; transition: 0.3s; }
+        .nav a:hover { background: rgba(76,175,80,0.3); }
+        .nav a.ativo { background: rgba(34,197,94,0.3); }
+        .hero { text-align: center; padding: 40px 25px; background: rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.1); }
+        .hero h1 { font-size: 2rem; margin-bottom: 10px; color: #86efac; }
+        .hero p { color: #b2dfdb; max-width: 600px; margin: 0 auto; }
+        .secao { background: rgba(255,255,255,0.04); border-radius: 12px; padding: 25px; margin-bottom: 25px; border-left: 4px solid #22c55e; }
+        .secao h2 { color: #86efac; margin-bottom: 18px; font-size: 1.3rem; }
+        .form-grupo { margin-bottom: 18px; }
+        label { display: block; color: #e5e7eb; margin-bottom: 6px; font-size: 0.95rem; }
+        input { width: 100%; padding: 12px 15px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); background: rgba(0,0,0,0.15); color: #fff; font-size: 1rem; }
+        input:focus { outline: none; border-color: #22c55e; }
+        button { background: #22c55e; color: white; border: none; padding: 12px 25px; border-radius: 8px; font-size: 1rem; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        button:hover { background: #16a34a; transform: translateY(-2px); }
+        .resultado { margin-top: 20px; padding: 20px; background: rgba(34,197,94,0.08); border-radius: 8px; display: none; }
+        .resultado.mostrar { display: block; }
+        .valor-grande { font-size: 2rem; font-weight: bold; color: #4ade80; text-align: center; margin: 10px 0; }
+        .valor-destaque { color: #fcd34d; }
+        .historico-item { padding: 15px; background: rgba(255,255,255,0.04); border-radius: 6px; margin-bottom: 10px; border-left: 3px solid #3b82f6; }
+        .data { font-size: 0.85rem; color: #9ca3af; margin-bottom: 5px; }
+        .sem-registro { color: #9ca3af; text-align: center; padding: 20px; }
+        .limpar-btn { background: rgba(239,68,68,0.15); color: #fca5a5; margin-top: 10px; }
+        .limpar-btn:hover { background: rgba(239,68,68,0.25); }
+        .rodape { text-align: center; padding: 25px; color: #6b7280; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 20px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media(max-width: 600px) {
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <a href="index.html">🏠 Início</a>
+            <a href="jogos.html">🎮 Desafios</a>
+            <a href="economia.html" class="ativo">💰 Economia</a>
+            <a href="noticias.html">📰 Notícias</a>
+            <a href="dicas.html">💡 Dicas</a>
+            <a href="sobre.html">ℹ️ Sobre</a>
+            <a href="conta.html">👤 Minha Conta</a>
+        </nav>
+
+        <div class="hero">
+            <h1>💰 Economia de Água e Energia</h1>
+            <p>Registre seus gastos mensais e veja quanto você pode economizar. Cada real economizado é também um recurso preservado!</p>
+        </div>
+
+        <!-- REGISTRAR GASTOS -->
+        <section class="secao">
+            <h2>📝 Registrar Gastos do Mês</h2>
+            <div class="grid-2">
+                <div class="form-grupo">
+                    <label>💡 Conta de Luz (R$)</label>
+                    <input type="number" id="luzAtual" placeholder="Ex: 150" step="0.01">
+                </div>
+                <div class="form-grupo">
+                    <label>💧 Conta de Água (R$)</label>
+                    <input type="number" id="aguaAtual" placeholder="Ex: 80" step="0.01">
+                </div>
+            </div>
+            <div class="form-grupo">
+                <label>Mês de referência</label>
+                <input type="month" id="mesReferencia">
+            </div>
+            <button onclick="calcularEconomia()">📊 Calcular & Salvar</button>
+
+            <div class="resultado" id="areaResultado">
+                <h3 style="color:#86efac; margin-bottom:15px;">📈 Seus Resultados</h3>
+                <div class="grid-2">
+                    <div style="text-align:center;">
+                        <p style="color:#9ca3af;">Conta de Luz</p>
+                        <div class="valor-grande">R$ <span id="valorLuz">0</span></div>
+                        <p style="color:#4ade80;">Economia estimada: <strong id="economiaLuz">R$ 0</strong>/mês</p>
+                    </div>
+                    <div style="text-align:center;">
+                        <p style="color:#9ca3af;">Conta de Água</p>
+                        <div class="valor-grande">R$ <span id="valorAgua">0</span></div>
+                        <p style="color:#4ade80;">Economia estimada: <strong id="economiaAgua">R$ 0</strong>/mês</p>
+                    </div>
+                </div>
+                <div style="margin-top:20px; padding:15px; background:rgba(251,191,36,0.05); border-radius:6px; text-align:center;">
+                    <p style="color:#fcd34d; font-size:1.1rem;">💵 Economia Total Estimada: <strong class="valor-grande" style="font-size:1.5rem;">R$ <span id="economiaTotal">0</span></strong>/mês</p>
+                    <p style="color:#9ca3af; font-size:0.9rem;">Isso são cerca de <strong id="anualTotal">R$ 0</strong> por ano!</p>
+                </div>
+                <p style="margin-top:15px; color:#9ca3af; font-size:0.9rem;">💡 A economia estimada considera pequenas mudanças como: desligar aparelhos, reduzir tempo de banho e reutilizar água.</p>
+            </div>
+        </section>
+
+        <!-- HISTÓRICO -->
+        <section class="secao">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+                <h2>📋 Histórico Mensal</h2>
+                <button class="limpar-btn" onclick="limparHistorico()">🗑️ Limpar</button>
+            </div>
+            <div id="listaHistorico">
+                <p class="sem-registro">Nenhum registro ainda. Comece acima!</p>
+            </div>
+        </section>
+
+        <footer class="rodape">
+            <p><strong>🌿 Jornada da Sustentabilidade</strong> — Economizar é cuidar do futuro · © 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        // Define o mês atual como padrão
+        document.getElementById('mesReferencia').valueAsDate = new Date();
+
+        // ========== CALCULAR E SALVAR ==========
+        function calcularEconomia() {
+            const luz = parseFloat(document.getElementById('luzAtual').value) || 0;
+            const agua = parseFloat(document.getElementById('aguaAtual').value) || 0;
+            const mes = document.getElementById('mesReferencia').value;
+
+            if (!luz && !agua) {
+                alert('Digite pelo menos um valor para calcular!');
+                return;
+            }
+
+            // Estimativas simples de economia (20% para luz, 15% para água)
+            const econLuz = (luz * 0.20).toFixed(2);
+            const econAgua = (agua * 0.15).toFixed(2);
+            const econTotal = (parseFloat(econLuz) + parseFloat(econAgua)).toFixed(2);
+            const econAnual = (parseFloat(econTotal) * 12).toFixed(2);
+
+            // Mostra resultados
+            document.getElementById('valorLuz').textContent = luz.toFixed(2);
+            document.getElementById('valorAgua').textContent = agua.toFixed(2);
+            document.getElementById('economiaLuz').textContent = 'R$ ' + econLuz;
+            document.getElementById('economiaAgua').textContent = 'R$ ' + econAgua;
+            document.getElementById('economiaTotal').textContent = econTotal;
+            document.getElementById('anualTotal').textContent = econAnual;
+            document.getElementById('areaResultado').classList.add('mostrar');
+
+            // Salva no histórico
+            salvarRegistro(mes, luz, agua, econLuz, econAgua);
+        }
+
+        // ========== SALVAR NO HISTÓRICO ==========
+        function salvarRegistro(mes, luz, agua, econLuz, econAgua) {
+            let historico = JSON.parse(localStorage.getItem('historicoEconomia') || '[]');
+            
+            // Formata mês para exibição
+            const [ano, mesNum] = mes.split('-');
+            const nomesMeses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+            const mesNome = nomesMeses[parseInt(mesNum)-1] + ' de ' + ano;
+
+            const registro = {
+                id: Date.now(),
+                mes: mesNome,
+                mesBruto: mes,
+                luz: luz.toFixed(2),
+                agua: agua.toFixed(2),
+                econLuz: econLuz,
+                econAgua: econAgua,
+                data: new Date().toLocaleString('pt-BR')
+            };
+
+            historico.unshift(registro);
+            localStorage.setItem('historicoEconomia', JSON.stringify(historico));
+            
+            carregarHistorico();
+        }
+
+        // ========== CARREGAR HISTÓRICO ==========
+        function carregarHistorico() {
+            const historico = JSON.parse(localStorage.getItem('historicoEconomia') || '[]');
+            const lista = document.getElementById('listaHistorico');
+
+            if (historico.length === 0) {
+                lista.innerHTML = '<p class="sem-registro">Nenhum registro ainda. Comece acima!</p>';
+                return;
+            }
+
+            lista.innerHTML = '';
+            historico.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'historico-item';
+                div.innerHTML = `
+                    <div class="data">📅 ${item.mes}</div>
+                    <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                        <div>💡 Luz: R$ ${item.luz}</div>
+                        <div>💧 Água: R$ ${item.agua}</div>
+                        <div style="color:#4ade80; font-weight:bold;">💵 Economia: R$ ${(parseFloat(item.econLuz) + parseFloat(item.econAgua)).toFixed(2)}</div>
+                    </div>
+                `;
+                lista.appendChild(div);
+            });
+        }
+
+        // ========== LIMPAR HISTÓRICO ==========
+        function limparHistorico() {
+            if (confirm('Tem certeza? Isso apagará todos os seus registros de economia!')) {
+                localStorage.removeItem('historicoEconomia');
+                carregarHistorico();
+                document.getElementById('areaResultado').classList.remove('mostrar');
+                document.getElementById('luzAtual').value = '';
+                document.getElementById('aguaAtual').value = '';
+            }
+        }
+
+        // Carrega o histórico ao abrir a página
+        carregarHistorico();
+    </script>
+</body>
+</html>

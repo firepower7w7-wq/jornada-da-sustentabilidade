@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornada da Sustentabilidade</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); min-height: 100vh; padding: 15px; color: #fff; line-height: 1.7; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .mensagem-logado { background: rgba(34, 197, 94, 0.15); border: 1px solid #22c55e; color: #86efac; padding: 12px 20px; border-radius: 8px; text-align: center; margin-bottom: 20px; display: none; }
+        .nav { background: rgba(0,0,0,0.25); padding: 15px; border-radius: 12px; text-align: center; margin-bottom: 30px; position: sticky; top: 0; backdrop-filter: blur(5px); }
+        .nav a { color: #99f6e4; text-decoration: none; margin: 5px 6px; padding: 8px 10px; border-radius: 6px; display: inline-block; transition: 0.3s; }
+        .nav a:hover { background: rgba(76,175,80,0.3); transform: translateY(-2px); }
+        .hero { text-align: center; padding: 50px 25px; background: rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 35px; border: 1px solid rgba(255,255,255,0.1); }
+        .hero h1 { font-size: 2.2rem; margin-bottom: 15px; color: #86efac; }
+        .hero p { font-size: 1.1rem; color: #b2dfdb; max-width: 700px; margin: 0 auto 25px; }
+        .btn { display: inline-block; padding: 13px 28px; border-radius: 8px; font-weight: bold; text-decoration: none; margin: 5px; transition: 0.3s; border: none; cursor: pointer; font-size: 1rem; }
+        .btn.primario { background: #22c55e; color: white; }
+        .btn.primario:hover { background: #16a34a; transform: translateY(-2px); }
+        .btn.secundario { background: transparent; color: #99f6e4; border: 2px solid #2dd4bf; }
+        .btn.secundario:hover { background: rgba(45,212,191,0.15); }
+        .secao { background: rgba(255,255,255,0.04); border-radius: 12px; padding: 30px; margin-bottom: 35px; border-left: 4px solid #22c55e; }
+        .secao h2 { color: #86efac; margin-bottom: 20px; font-size: 1.5rem; }
+        .secao p { color: #e5e7eb; margin-bottom: 12px; }
+        .secao a { color: #2dd4bf; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+        @media(max-width: 768px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        }
+        .card { background: rgba(255,255,255,0.05); padding: 22px; border-radius: 10px; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.08); }
+        .card h3 { color: #99f6e4; margin-bottom: 12px; font-size: 1.1rem; }
+        .card p { color: #d1d5db; font-size: 0.95rem; line-height: 1.6; }
+        .card a { color: #2dd4bf; font-size: 0.9rem; display: inline-block; margin-top: 10px; }
+        .card.agua { border-top: 3px solid #3b82f6; }
+        .card.luz { border-top: 3px solid #eab308; }
+        .card.comida { border-top: 3px solid #f97316; }
+        .card.lixo { border-top: 3px solid #a855f7; }
+        .estat { text-align: center; }
+        .estat .numero { font-size: 2rem; font-weight: bold; color: #4ade80; margin-bottom: 5px; }
+        .estat .texto { color: #9ca3af; font-size: 0.9rem; }
+        .passo { display: flex; gap: 15px; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .passo-num { background: #22c55e; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
+        .passo-texto h4 { color: #99f6e4; margin-bottom: 4px; }
+        .passo-texto p { color: #9ca3af; font-size: 0.9rem; margin: 0; }
+        .curiosidade { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); color: #e5e7eb; font-size: 0.95rem; }
+        .curiosidade strong { color: #fef08a; }
+        .citacao { font-style: italic; color: #b2dfdb; padding: 15px 20px; background: rgba(139,92,246,0.05); border-radius: 8px; border-left: 3px solid #a78bfa; margin: 15px 0; }
+        .rodape { text-align: center; padding: 30px; color: #6b7280; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 20px; }
+        .rodape strong { color: #86efac; }
+        #menuUsuario, #menuVisitante { display: inline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div id="mensagemLogado" class="mensagem-logado">👋 Bem-vindo(a) de volta! Fico muito feliz em ver você continuando sua jornada de sustentabilidade.</div>
+
+        <nav class="nav">
+            <a href="index.html" style="background:rgba(34,197,94,0.3)">🏠 Início</a>
+            <a href="jogos.html">🎮 Desafios</a>
+            <a href="economia.html">💰 Economia</a>
+            <a href="noticias.html">📰 Notícias</a>
+            <a href="dicas.html">💡 Dicas</a>
+            <a href="sobre.html">ℹ️ Sobre</a>
+            <span id="menuVisitante">
+                <a href="cadastro.html">📝 Cadastro</a>
+                <a href="login.html">🔐 Entrar</a>
+            </span>
+            <span id="menuUsuario" style="display:none">
+                <a href="conta.html">👤 Minha Conta</a>
+                <a href="#" onclick="sair();return false">🚪 Sair</a>
+            </span>
+        </nav>
+
+        <section class="hero">
+            <h1>🌿 Jornada da Sustentabilidade</h1>
+            <p>Educar para agir. Conscientizar para transformar. Um projeto feito com dedicação para mostrar que cada pessoa pode fazer a diferença — começando hoje, na nossa própria casa, na nossa rua, no nosso mundo.</p>
+            <a href="jogos.html" class="btn primario">🎮 Começar os Desafios</a>
+            <a href="dicas.html" class="btn secundario">💡 Ver Dicas</a>
+        </section>
+
+        <section class="secao">
+            <h2>💡 Por que este projeto existe?</h2>
+            <p>Durante as aulas e conversas com familiares e amigos, percebi que muita gente quer ajudar o planeta mas não sabe por onde começar. As informações parecem complicadas, técnicas ou distantes da nossa realidade do dia a dia.</p>
+            <p>Então decidi criar este espaço: um lugar simples, acessível e honesto, onde qualquer pessoa pode aprender, praticar e se inspirar. Não pretendo ter todas as respostas — apenas compartilhar o que aprendi e convidar você a pensar junto.</p>
+            <div class="citacao">
+                "Não podemos fazer tudo, mas cada um de nós pode fazer alguma coisa. E quando milhões de pessoas fazem um pouquinho, o mundo muda."
+            </div>
+        </section>
+
+        <section class="secao">
+            <h2>📊 A realidade que precisamos enxergar</h2>
+            <p>Os números são alarmantes, mas não servem para nos assustar — servem para nos mover. Cada estatística é também uma oportunidade de mudança:</p>
+            <div class="grid-4" style="margin-top:20px;">
+                <div class="card estat">
+                    <div class="numero">2B+</div>
+                    <div class="texto">Pessoas sem acesso a água potável</div>
+                </div>
+                <div class="card estat">
+                    <div class="numero">33%</div>
+                    <div class="texto">Toda comida do mundo é desperdiçada</div>
+                </div>
+                <div class="card estat">
+                    <div class="numero">450</div>
+                    <div class="texto">Anos para uma garrafa plástica desaparecer</div>
+                </div>
+                <div class="card estat">
+                    <div class="numero">75%</div>
+                    <div class="texto">Emissões vêm de geração de energia</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="secao">
+            <h2>💬 Dicas em Destaque — Pequenos Passos</h2>
+            <p>Mudanças grandes começam com hábitos pequenos. Aqui vão algumas ideias simples que você pode adotar já hoje:</p>
+            <div class="grid-2" style="margin-top:20px;">
+                <div class="card agua">
+                    <h3>💧 Na hora do banho</h3>
+                    <p>Reduzir o banho em apenas 2 minutos economiza cerca de 12 litros de água por pessoa. Multiplique por todos da casa e por 365 dias — faz muita diferença!</p>
+                    <a href="dicas.html">Veja mais dicas de água →</a>
+                </div>
+                <div class="card luz">
+                    <h3>⚡ Luz natural é a melhor</h3>
+                    <p>Abra as janelas durante o dia! A luz do sol é gratuita, não gera calor e não aparece na conta de luz. Além disso, melhora o humor e a saúde.</p>
+                    <a href="dicas.html">Veja mais dicas de luz →</a>
+                </div>
+                <div class="card comida">
+                    <h3>🍽️ Compre com lista</h3>
+                    <p>Ir ao mercado sem uma lista leva a compras por impulso — e muito alimento acaba estragando na geladeira. Planejar também é economia para o seu bolso!</p>
+                    <a href="dicas.html">Veja mais dicas de comida →</a>
+                </div>
+                <div class="card lixo">
+                    <h3>♻️ Separe o lixo</h3>
+                    <p>O vidro pode ser reciclado infinitas vezes sem perder qualidade. O alumínio volta às prateleiras em apenas 60 dias. Separar em casa é o primeiro passo!</p>
+                    <a href="dicas.html">Veja mais dicas de reciclagem →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="secao">
+            <h2>🚀 Por onde começar — 4 Passos Simples</h2>
+            <p>Não precisa mudar tudo de uma vez. Comece por aqui:</p>
+            <div style="margin-top:20px;">
+                <div class="passo">
+                    <div class="passo-num">1</div>
+                    <div class="passo-texto">
+                        <h4>Crie sua conta</h4>
+                        <p>É rápido e gratuito. Assim você guarda seu progresso, acumula pontos e acompanha sua evolução pessoal.</p>
+                    </div>
+                </div>
+                <div class="passo">
+                    <div class="passo-num">2</div>
+                    <div class="passo-texto">
+                        <h4>Faça os desafios</h4>
+                        <p>São 6 jogos rápidos sobre água, energia, alimentos e reciclagem. Teste seus conhecimentos e aprenda brincando!</p>
+                    </div>
+                </div>
+                <div class="passo">
+                    <div class="passo-num">3</div>
+                    <div class="passo-texto">
+                        <h4>Use a calculadora</h4>
+                        <p>Anote seus gastos reais de luz e água e veja quanto pode economizar ao fim do mês e do ano. Os resultados costumam surpreender!</p>
+                    </div>
+                </div>
+                <div class="passo">
+                    <div class="passo-num">4</div>
+                    <div class="passo-texto">
+                        <h4>Compartilhe com alguém</h4>
+                        <p>Mostre este site para um amigo, um familiar ou um colega. Consciência só cresce quando é compartilhada — e você já pode ser o exemplo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="secao">
+            <h2>🧠 Você Sabia?</h2>
+            <div style="margin-top:15px;">
+                <div class="curiosidade">📌 Se cada pessoa fechasse a torneira ao escovar os dentes, economizaríamos cerca de <strong>15 litros por dia</strong> — isso são mais de 5 bilhões de litros economizados no mundo inteiro, todos os dias.</div>
+                <div class="curiosidade">📌 Uma lâmpada incandescente converte apenas 5% da energia em luz. Os outros 95% viram calor e são desperdiçados. Já a LED aproveita até 95% — e dura 25 vezes mais!</div>
+                <div class="curiosidade">📌 No Brasil, cerca de <strong>40% da água tratada é perdida</strong> antes mesmo de chegar à torneira da sua casa. Por isso cada gota que você economiza conta ainda mais.</div>
+                <div class="curiosidade">📌 O plástico que você joga fora hoje ainda estará no planeta daqui a 400 anos. Se não precisava usar, não use — e se usou, sempre recicle!</div>
+                <div class="curiosidade">📌 Aproximadamente um terço de toda a comida produzida no mundo é desperdiçada — cerca de 1,3 bilhão de toneladas por ano. Isso é comida suficiente para alimentar todas as pessoas que passam fome no planeta.</div>
+            </div>
+        </section>
+
+        <section class="secao">
+            <h2>ℹ️ Sobre este Projeto</h2>
+            <p>Este site é um trabalho educacional desenvolvido com o propósito de levar informação acessível sobre meio ambiente e sustentabilidade para mais pessoas. Não tem vínculo comercial e não pretende substituir fontes especializadas — é um ponto de partida para a reflexão e a ação.</p>
+            <p>Aqui você encontra jogos educativos, notícias com fontes reais, dicas práticas do dia a dia e uma ferramenta simples para calcular sua economia de recursos. Tudo pensado para ser útil, verdadeiro e fácil de usar.</p>
+            <p><a href="sobre.html">Clique aqui para saber mais sobre os objetivos, autores e etapas de desenvolvimento do projeto →</a></p>
+        </section>
+
+        <footer class="rodape">
+            <p><strong>🌿 Jornada da Sustentabilidade</strong> — Educação, Consciência e Ação · © 2026</p>
+            <p style="margin-top:8px; font-size:0.85rem;">Este é um projeto educacional desenvolvido com o objetivo de conscientização e aprendizado.</p>
+        </footer>
+    </div>
+
+    <script>
+        const logado = localStorage.getItem('logado');
+        const usuario = localStorage.getItem('usuario');
+
+        if (logado === 'sim' && usuario) {
+            document.getElementById('mensagemLogado').style.display = 'block';
+            document.getElementById('menuVisitante').style.display = 'none';
+            document.getElementById('menuUsuario').style.display = 'inline';
+        }
+
+        function sair() {
+            localStorage.removeItem('logado');
+            localStorage.removeItem('usuario');
+            location.reload();
+        }
+    </script>
+</body>
+</html>

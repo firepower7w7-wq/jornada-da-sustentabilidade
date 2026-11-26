@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias — Jornada da Sustentabilidade</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); min-height: 100vh; padding: 15px; color: #fff; line-height: 1.7; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .nav { background: rgba(0,0,0,0.25); padding: 15px; border-radius: 12px; text-align: center; margin-bottom: 30px; position: sticky; top: 0; backdrop-filter: blur(5px); }
+        .nav a { color: #99f6e4; text-decoration: none; margin: 5px 6px; padding: 8px 10px; border-radius: 6px; display: inline-block; transition: 0.3s; }
+        .nav a:hover { background: rgba(76,175,80,0.3); }
+        .hero { text-align: center; padding: 40px 25px; background: rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.1); }
+        .hero h1 { font-size: 2rem; margin-bottom: 10px; color: #86efac; }
+        .hero p { color: #b2dfdb; max-width: 600px; margin: 0 auto; }
+        .noticia { background: rgba(255,255,255,0.04); border-radius: 12px; padding: 25px; margin-bottom: 25px; border-left: 4px solid #22c55e; transition: 0.3s; }
+        .noticia:hover { transform: translateX(5px); background: rgba(255,255,255,0.06); }
+        .noticia.emdestaque { border-left-color: #fbbf24; background: rgba(251,191,36,0.03); }
+        .categoria { display: inline-block; font-size: 0.8rem; padding: 4px 10px; border-radius: 20px; margin-bottom: 10px; font-weight: 600; }
+        .categoria.agua { background: rgba(59,130,246,0.2); color: #93c5fd; }
+        .categoria.comida { background: rgba(249,115,22,0.2); color: #fdba74; }
+        .categoria.lixo { background: rgba(168,85,247,0.2); color: #d8b4fe; }
+        .categoria.clima { background: rgba(239,68,68,0.2); color: #fca5a5; }
+        .noticia h2 { font-size: 1.25rem; margin-bottom: 8px; color: #e5e7eb; }
+        .data { font-size: 0.85rem; color: #9ca3af; margin-bottom: 15px; }
+        .noticia p { color: #d1d5db; margin-bottom: 12px; font-size: 0.98rem; }
+        .fonte { font-size: 0.85rem; color: #6ee7b7; font-style: italic; }
+        .fonte a { color: #34d399; text-decoration: underline; }
+        .resumo { background: rgba(0,0,0,0.15); padding: 12px 15px; border-radius: 6px; margin-top: 12px; border-left: 3px solid #4ade80; }
+        .resumo strong { color: #86efac; }
+        .rodape { text-align: center; padding: 25px; color: #6b7280; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <a href="index.html">🏠 Início</a>
+            <a href="jogos.html">🎮 Desafios</a>
+            <a href="economia.html">💰 Economia</a>
+            <a href="noticias.html" style="background:rgba(34,197,94,0.3)">📰 Notícias</a>
+            <a href="dicas.html">💡 Dicas</a>
+            <a href="sobre.html">ℹ️ Sobre</a>
+            <a href="cadastro.html">📝 Cadastro</a>
+            <a href="login.html">🔐 Entrar</a>
+        </nav>
+
+        <div class="hero">
+            <h1>🌍 Notícias do Planeta</h1>
+            <p>Fatos reais e atualizados sobre o que está acontecendo com o nosso mundo. Informação é o primeiro passo para a mudança.</p>
+        </div>
+
+        <!-- Notícia 1 -->
+        <div class="noticia emdestaque">
+            <span class="categoria comida">🍎 Alimentos</span>
+            <h2>ONU alerta: quase um terço de toda comida do mundo ainda é desperdiçada</h2>
+            <div class="data">📅 Outubro de 2026 — Fonte: Programa das Nações Unidas para o Meio Ambiente (PNUMA)</div>
+            <p>O mais recente relatório da ONU confirma que aproximadamente 33% de todos os alimentos produzidos no planeta nunca chegam ao prato de ninguém — cerca de 1,3 bilhão de toneladas por ano. O desperdício acontece em todas as etapas: na produção, no transporte, nos supermercados e também dentro das nossas casas.</p>
+            <p>Além da perda de alimentos, isso representa um enorme desperdício de água, energia e trabalho. Se o desperdício de alimentos fosse um país, seria o terceiro maior emissor de gases de efeito estufa do mundo.</p>
+            <div class="resumo">
+                <strong>💡 O que podemos fazer:</strong> Comprar com lista, guardar alimentos corretamente e reaproveitar sobras já faz uma diferença enorme. Pequenos hábitos somados de milhões de pessoas mudam o cenário.
+            </div>
+            <div class="fonte">Leia mais em: <a href="https://www.unep.org" target="_blank">unep.org</a></div>
+        </div>
+
+        <!-- Notícia 2 -->
+        <div class="noticia">
+            <span class="categoria agua">💧 Água</span>
+            <h2>Mais de 2 bilhões de pessoas ainda não têm água potável em casa</h2>
+            <div class="data">📅 Setembro de 2026 — Fonte: Organização Mundial da Saúde (OMS) & UNICEF</div>
+            <p>Dados atualizados mostram que cerca de 2,2 bilhões de pessoas no mundo não têm acesso a água potável segura. Isso significa que uma em cada quatro pessoas não tem água limpa para beber em sua própria casa. A situação se agrava com as mudanças climáticas, que alteram padrões de chuva e secas em diversas regiões.</p>
+            <p>No Brasil, embora tenhamos muita água disponível, a distribuição é desigual e o desperdício nas redes de distribuição chega a quase 40% em algumas regiões. Cada gota economizada hoje ajuda a garantir que mais pessoas tenham acesso amanhã.</p>
+            <div class="resumo">
+                <strong>💡 O que podemos fazer:</strong> Fechar torneira ao escovar os dentes, consertar vazamentos e reutilizar água da chuva ou de máquina de lavar. Água é vida — não é infinita.
+            </div>
+            <div class="fonte">Leia mais em: <a href="https://www.who.int" target="_blank">who.int</a> / <a href="https://www.unicef.org" target="_blank">unicef.org</a></div>
+        </div>
+
+        <!-- Notícia 3 -->
+        <div class="noticia">
+            <span class="categoria lixo">🛒 Plástico descartável continua crescendo no mundo</span>
+            <h2>Produção de plástico dobra em 20 anos e só 9% é reciclado corretamente</h2>
+            <div class="data">📅 Outubro de 2026 — Fonte: Banco Mundial & Instituto de Recursos Mundiais</div>
+            <p>A produção global de plástico mais do que dobrou nas últimas duas décadas, saltando de 230 milhões de toneladas em 2005 para mais de 460 milhões em 2025. O problema? Apenas cerca de 9% de todo o plástico já produzido foi reciclado. A maior parte vai para aterros, rios e oceanos.</p>
+            <p>Itens como sacolas, garrafas e embalagens têm vida útil de minutos, mas permanecem no planeta por séculos. Uma garrafa plástica leva até 450 anos para se decompor.</p>
+            <div class="resumo">
+                <strong>💡 O que podemos fazer:</strong> Usar garrafa reutilizável, levar sacola própria às compras e evitar produtos com excesso de embalagem. Menos plástico = mais futuro.
+            </div>
+            <div class="fonte">Leia mais em: <a href="https://www.worldbank.org" target="_blank">worldbank.org</a></div>
+        </div>
+
+        <!-- Notícia 4 -->
+        <div class="noticia">
+            <span class="categoria clima">🌡️ Clima</span>
+            <h2>Emissões de energia ainda crescem e batem recorde histórico</h2>
+            <div class="data">📅 Novembro de 2026 — Fonte: Agência Internacional de Energia (AIE)</div>
+            <p>Apesar de todos os avanços em energias renováveis, as emissões globais de dióxido de carbono ligadas à energia atingiram um novo recorde histórico em 2025, superando 37 bilhões de toneladas. A queima de carvão, petróleo e gás continua sendo a maior causa das mudanças climáticas.</p>
+            <p>A boa notícia é que a participação de energias limpas cresce mais rápido do que nunca. Cada lâmpada que desligamos, cada aparelho desconectado e cada vez que escolhemos economizar energia contribuímos para reduzir essa pressão sobre o planeta.</p>
+            <div class="resumo">
+                <strong>💡 O que podemos fazer:</strong> Trocar lâmpadas por LED, desligar aparelhos da tomada e aproveitar a luz natural. Economizar energia também reduz a conta no fim do mês!
+            </div>
+            <div class="fonte">Leia mais em: <a href="https://www.iea.org" target="_blank">iea.org</a></div>
+        </div>
+
+        <!-- Notícia 5 -->
+        <div class="noticia">
+            <span class="categoria agua">🌳 Brasil lidera, mas perde 13% de vegetação nativa</span>
+            <h2>País tem um dos maiores patrimônios naturais do mundo, mas precisa proteger melhor</h2>
+            <div class="data">📅 Outubro de 2026 — Fonte: Instituto Brasileiro de Geografia e Estatística (IBGE)</div>
+            <p>O Brasil detém cerca de 13% de toda a biodiversidade conhecida do planeta, mas perdeu aproximadamente 13% de sua vegetação nativa nas últimas décadas. A preservação de matas e florestas é essencial não só para os animais e plantas, mas também para manter o ciclo da chuva e a qualidade do ar que respiramos.</p>
+            <p>Cada árvore preservada ajuda a regular a temperatura, manter os rios cheios e absorver gases que aquecem o planeta. Preservar não é só cuidar da natureza — é cuidar de nós mesmos.</p>
+            <div class="resumo">
+                <strong>💡 O que podemos fazer:</strong> Plantar árvores em espaços adequados, não cortar sem autorização e apoiar projetos de conservação. A natureza cuida de nós quando cuidamos dela.
+            </div>
+            <div class="fonte">Leia mais em: <a href="https://www.ibge.gov.br" target="_blank">ibge.gov.br</a></div>
+        </div>
+
+        <footer class="rodape">
+            <p><strong>🌿 Jornada da Sustentabilidade</strong> — Notícias com fontes confiáveis · © 2026</p>
+            <p style="margin-top:5px; font-size:0.8rem;">As notícias aqui apresentadas são baseadas em dados públicos de organizações internacionais e nacionais. Para aprofundar, sempre consulte as fontes oficiais.</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafios — Jornada da Sustentabilidade</title>
+    <style>
+        * {margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif;}
+        body {background:linear-gradient(135deg, #0f2027, #203a43, #2c5364); min-height:100vh; padding:20px; color:white;}
+        .container {max-width:900px; margin:0 auto;}
+        .nav {background:rgba(0,0,0,0.3); padding:12px; border-radius:8px; text-align:center; margin-bottom:20px;}
+        .nav a {color:#99f6e4; text-decoration:none; margin:4px; padding:6px 10px; border-radius:4px; display:inline-block;}
+        .nav a.ativo {background:rgba(34,197,94,0.3);}
+        .hero {text-align:center; margin-bottom:20px;}
+
+        .menu {text-align:center; margin-bottom:20px;}
+        .menu button {background:#555; color:white; border:none; padding:10px 12px; margin:3px; border-radius:5px; font-size:14px; cursor:pointer; pointer-events:auto;}
+        .menu button.ativo {background:#22c55e;}
+
+        .pagina {display:none; background:rgba(255,255,255,0.05); padding:25px; border-radius:8px;}
+        .pagina.visivel {display:block;}
+
+        .botao {background:#22c55e; color:white; border:none; padding:10px 25px; border-radius:5px; font-size:16px; cursor:pointer; font-weight:bold; margin:8px; pointer-events:auto;}
+        .botao:hover {background:#16a34a;}
+
+        .roleta-caixa {position:relative; width:280px; height:280px; margin:20px auto;}
+        .ponteiro {position:absolute; top:-8px; left:50%; transform:translateX(-50%); width:0; height:0; border-left:16px solid transparent; border-right:16px solid transparent; border-top:30px solid white; z-index:10;}
+        .roleta {width:100%; height:100%; border-radius:50%; background:conic-gradient(#22c55e 0deg 45deg, #3b82f6 45deg 90deg, #f59e0b 90deg 135deg, #ef4444 135deg 180deg, #8b5cf6 180deg 225deg, #06b6d4 225deg 270deg, #ec4899 270deg 315deg, #84cc16 315deg 360deg); border:6px solid white; transition:transform 4s cubic-bezier(0.17, 0.67, 0.13, 0.99);}
+        .resultado {margin-top:20px; padding:15px; background:rgba(34,197,94,0.1); border-radius:8px; text-align:center; font-size:17px; min-height:60px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="index.html">🏠 Início</a>
+            <a href="jogos.html" class="ativo">🎮 Desafios</a>
+            <a href="economia.html">💰 Economia</a>
+            <a href="noticias.html">📰 Notícias</a>
+            <a href="dicas.html">💡 Dicas</a>
+            <a href="sobre.html">ℹ️ Sobre</a>
+            <a href="conta.html">👤 Minha Conta</a>
+        </div>
+
+        <div class="hero">
+            <h1>🎮 Desafios Educativos</h1>
+            <p>Clique nos botões abaixo e divirta-se aprendendo!</p>
+        </div>
+
+        <div class="menu">
+            <button class="ativo" onclick="abrirPagina(1)">🎯 Caça</button>
+            <button onclick="abrirPagina(2)">💧 Água</button>
+            <button onclick="abrirPagina(3)">⚡ Energia</button>
+            <button onclick="abrirPagina(4)">🍎 Comida</button>
+            <button onclick="abrirPagina(5)">♻️ Lixo</button>
+            <button onclick="abrirPagina(6)">🌍 Geral</button>
+            <button onclick="abrirPagina(7)">🎡 Roleta</button>
+        </div>
+
+        <div class="pagina visivel" id="pag1">
+            <h3>🎯 Caça ao Desperdício</h3>
+            <p style="margin:15px 0;">Clique nos ❌ vermelhos antes que desapareçam!</p>
+            <p style="font-size:18px; font-weight:bold; color:#4ade80;">Pontos: <span id="p1">0</span></p>
+            <p style="text-align:center;"><button class="botao" onclick="iniciarCaca()">🚀 Iniciar Jogo</button></p>
+            <div id="areaCaca" style="position:relative; height:150px; border:2px dashed #444; border-radius:6px; margin-top:15px;"></div>
+        </div>
+
+        <div class="pagina" id="pag2">
+            <h3>💧 Quiz da Água</h3>
+            <p style="margin:15px 0;">Teste seus conhecimentos!</p>
+            <p style="font-size:18px; font-weight:bold; color:#4ade80;">Pontos: <span id="p2">0</span></p>
+            <p style="text-align:center;"><button class="botao" onclick="iniciarQuiz(2)">🚀 Começar</button></p>
+            <div id="q2"></div>
+        </div>
+
+        <div class="pagina" id="pag3">
+            <h3>⚡ Quiz da Energia</h3>
+            <p style="margin:15px 0;">Economia de energia!</p>
+            <p style="font-size:18px; font-weight:bold; color:#4ade80;">Pontos: <span id="p3">0</span></p>
+            <p style="text-align:center;"><button class="botao" onclick="iniciarQuiz(3)">🚀 Começar</button></p>
+            <div id="q3"></div>
+        </div>
+
+        <div class="pagina" id="pag4">
+            <h3>🍎 Desperdício de Comida</h3>
+            <p style="margin:15px 0;">Não jogue comida fora!</p>
+            <p style="font-size:18px; font-weight:bold; color:#4ade80;">Pontos: <span id="p4">0</span></p>
+            <p style="text-align:center;"><button class="botao" onclick="iniciarQuiz(4)">🚀 Começar</button></p>
+            <div id="q4"></div>
+        </div>
+
+        <div class="pagina" id="pag5">
+            <h3>♻️ Reciclagem</h3>
+            <p style="margin:15px 0;">Você sabe separar o lixo?</p>
+            <p style="font-size:18px; font-weight:bold; color:#4ade80;">Pontos: <span id="p5">0</span></p>
+            <p style="text-align:center;"><button class="botao" onclick="iniciarQuiz(5)">🚀 Começar</button></p>
+            <div id="q5"></div>
+        </div>
+
+        <div class="pagina" id="pag6">
+            <h3>🌍 Conhecimento Geral</h3>
+            <p style="margin:15px 0;">O que você sabe sobre o planeta?</p>
+            <p style="font-size:18px; font-weight:bold; color:#4ade80;">Pontos: <span id="p6">0</span></p>
+            <p style="text-align:center;"><button class="botao" onclick="iniciarQuiz(6)">🚀 Começar</button></p>
+            <div id="q6"></div>
+        </div>
+
+        <div class="pagina" id="pag7">
+            <h3 style="text-align:center;">🎡 Roleta Verde</h3>
+            <p style="text-align:center; margin:15px 0;">Gire e descubra uma dica sustentável!</p>
+            <div class="roleta-caixa">
+                <div class="ponteiro"></div>
+                <div class="roleta" id="roleta"></div>
+            </div>
+            <p style="text-align:center;"><button class="botao" onclick="girarRoleta()">🎡 Girar!</button></p>
+            <div class="resultado" id="resRoleta">✨ Clique em "Girar" para começar!</div>
+        </div>
+    </div>
+
+    <script>
+        function abrirPagina(n) {
+            for (var i=1; i<=7; i++) {
+                document.getElementById('pag'+i).classList.remove('visivel');
+            }
+            var botoes = document.querySelectorAll('.menu button');
+            for (var j=0; j<botoes.length; j++) {
+                botoes[j].classList.remove('ativo');
+            }
+            document.getElementById('pag'+n).classList.add('visivel');
+            event.target.classList.add('ativo');
+        }
+
+        function registrarPontos(qtd, acao) {
+            var u = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
+            if (!u) return;
+            var todos = JSON.parse(localStorage.getItem('usuarios') || '{}');
+            if (!todos[u.email]) return;
+            todos[u.email].pontos = (todos[u.email].pontos || 0) + qtd;
+            if (!todos[u.email].atividades) todos[u.email].atividades = [];
+            todos[u.email].atividades.unshift({acao:acao, pontos:qtd, data:new Date().toLocaleString('pt-BR')});
+            todos[u.email].atividades = todos[u.email].atividades.slice(0,10);
+            localStorage.setItem('usuarios', JSON.stringify(todos));
+        }
+
+        var ptsCaca = 0, tempoCaca = null;
+        function iniciarCaca() {
+            ptsCaca = 0; document.getElementById('p1').textContent = '0';
+            var area = document.getElementById('areaCaca');
+            area.innerHTML = '<p style="text-align:center;color:#aaa;">Clique nos ❌ | Tempo: <span id="tm">15</span>s</p>';
+            var t = 15;
+            tempoCaca = setInterval(function(){
+                t--; var el = document.getElementById('tm'); if(el) el.textContent = t+'s';
+                if(t<=0){
+                    clearInterval(tempoCaca); tempoCaca=null;
+                    area.innerHTML = '<p style="text-align:center;font-size:20px;color:#4ade80;">Fim! '+ptsCaca+' pontos!</p>';
+                    if(ptsCaca>0) registrarPontos(ptsCaca, 'Jogou Caça ao Desperdício');
+                }
+            },1000);
+            criarAlvo();
+        }
+        function criarAlvo() {
+            if(!tempoCaca) return;
+            var area = document.getElementById('areaCaca');
+            var maxX = area.offsetWidth - 50;
+            var mau = Math.random() > 0.4;
+            var b = document.createElement('button');
+            b.style.cssText = 'position:absolute; width:45px; height:45px; border-radius:50%; border:none; font-size:22px; cursor:pointer; pointer-events:auto;';
+            b.style.background = mau ? '#ef4444' : '#22c55e';
+            b.innerHTML = mau ? '❌' : '✅';
+            b.style.left = Math.random()*maxX+'px'; b.style.top = '40px';
+            b.onclick = function(){
+                if(mau){ ptsCaca+=10; }else{ ptsCaca=Math.max(0,ptsCaca-5); }
+                document.getElementById('p1').textContent = ptsCaca;
+                b.remove();
+            };
+            area.appendChild(b);
+            setTimeout(function(){if(b.parentNode)b.remove();},1400);
+            setTimeout(criarAlvo,600);
+        }
+
+        var perguntas = {
+            2: [
+                {q:'Quanto gasta um banho longo?', r:['<10L','~135L','1L'], c:1},
+                {q:'O que economiza água?', r:['Torneira aberta','Reutilizar','Banho longo'], c:1},
+                {q:'Água potável é:', r:['Infinita','Limitada','Do mar'], c:1}
+            ],
+            3: [
+                {q:'Qual gasta mais energia?', r:['LED','Chuveiro','Celular'], c:1},
+                {q:'Economiza energia?', r:['Ligado','Desligar','Abrir geladeira'], c:1},
+                {q:'Melhor energia:', r:['Solar','Carvão','Gás'], c:0}
+            ],
+            4: [
+                {q:'Quanto alimento se perde no mundo?', r:['1/3','1%','1/10'], c:0},
+                {q:'Sobras de comida:', r:['Jogar fora','Reaproveitar','Esquentar só'], c:1},
+                {q:'Comprar demais causa:', r:['Economia','Desperdício','Nada'], c:1}
+            ],
+            5: [
+                {q:'Papel vai na lixeira:', r:['Vermelha','Azul','Verde'], c:1},
+                {q:'Plástico vai na lixeira:', r:['Amarela','Verde','Marrom'], c:0},
+                {q:'Vidro é:', r:['Reciclável','Não reciclável','Uma vez'], c:0}
+            ],
+            6: [
+                {q:'Sustentabilidade é:', r:['Acabar recursos','Usar sem esgotar','Nada fazer'], c:1},
+                {q:'Qual reduz lixo?', r:['Comprar muito','Reutilizar','Jogar fora'], c:1},
+                {q:'Melhor transporte:', r:['Carro sozinho','A pé/bicicleta','Moto'], c:1}
+            ]
+        };
+        var idx=[0,0,0,0,0,0], pts=[0,0,0,0,0,0];
+        function iniciarQuiz(n){ idx[n-1]=0; pts[n-1]=0; document.getElementById('p'+n).textContent='0'; mostrarPergunta(n); }
+        function mostrarPergunta(n){
+            var lista=perguntas[n], i=idx[n-1], div=document.getElementById('q'+n);
+            if(i>=lista.length){
+                div.innerHTML='<p style="text-align:center;color:#4ade80;font-size:18px;">🎉'+pts[n-1]+' de '+lista.length+' acertos!</p>';
+                registrarPontos(pts[n-1]*10, 'Finalizou Quiz');
+                return;
+            }
+            var p=lista[i], html='<p style="font-size:16px;margin:10px 0;text-align:center;">'+(i+1)+'. '+p.q+'</p>';
+            for(var j=0;j<p.r.length;j++){
+                html+='<button style="display:block;width:100%;max-width:350px;margin:6px auto;padding:10px 16px;background:rgba(255,255,255,0.08);color:white;border:none;border-radius:5px;text-align:left;font-size:15px;cursor:pointer;pointer-events:auto;" onclick="resposta('+n+','+j+')">'+p.r[j]+'</button>';
+            }
+            div.innerHTML=html;
+        }
+        function resposta(n,j){
+            var correta=perguntas[n][idx[n-1]].c;
+            if(j===correta){ pts[n-1]++; document.getElementById('p'+n).textContent=pts[n-1]; }
+            idx[n-1]++; mostrarPergunta(n);
+        }
+
+        var dicas=[
+            {nome:'💧 Água', d:'Feche a torneira ao escovar os dentes!'},
+            {nome:'⚡ Energia', d:'Desligue luz e aparelhos ao sair!'},
+            {nome:'♻️ Lixo', d:'Separe o lixo para reciclagem!'},
+            {nome:'🌳 Natureza', d:'Não jogue lixo nas ruas!'},
+            {nome:'🚶 Transporte', d:'Vá a pé ou de bicicleta nas curtas distâncias!'},
+            {nome:'🍎 Comida', d:'Não jogue comida fora!'},
+            {nome:'🛒 Consumo', d:'Evite sacolas plásticas!'},
+            {nome:'💖 Cuide do planeta', d:'Pequenos gestos fazem a diferença!'}
+        ];
+        var girando=false, anguloAtual=0;
+        function girarRoleta(){
+            if(girando)return; girando=true;
+            var roleta=document.getElementById('roleta'), res=document.getElementById('resRoleta');
+            res.innerHTML='🎡 Girando...';
+            roleta.style.transition='none'; roleta.style.transform='rotate('+anguloAtual+'deg)';
+            setTimeout(function(){
+                var s=Math.floor(Math.random()*8);
+                anguloAtual+=360*3+(s*45)+22;
+                roleta.style.transition='transform 4s cubic-bezier(0.17, 0.67, 0.13, 0.99)';
+                roleta.style.transform='rotate('+anguloAtual+'deg)';
+                setTimeout(function(){
+                    res.innerHTML='<strong>'+dicas[s].nome+'</strong><br><br>'+dicas[s].d;
+                    girando=false;
+                },4200);
+            },50);
+        }
+    </script>
+</body>
+</html>

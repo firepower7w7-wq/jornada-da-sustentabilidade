@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Conta — Jornada da Sustentabilidade</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            padding: 20px;
+            color: white;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        .nav {
+            background: rgba(0,0,0,0.3);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .nav a {
+            color: #99f6e4;
+            text-decoration: none;
+            margin: 4px;
+            padding: 6px 10px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .nav a.ativo { background: rgba(34,197,94,0.3); }
+        
+        h1 { text-align: center; margin-bottom: 25px; color: #86efac; }
+        h2 { font-size: 18px; margin-bottom: 15px; color: #99f6e4; }
+
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .perfil-topo {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .perfil-nome { font-size: 24px; font-weight: bold; margin-bottom: 5px; }
+        .patente {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .patente-aprendiz { background: #6b7280; color: white; }
+        .patente-cacador { background: #f59e0b; color: #1f2937; }
+        .patente-guerreiro { background: #3b82f6; color: white; }
+        .patente-mestre { background: linear-gradient(90deg, #8b5cf6, #ec4899); color: white; }
+
+        .pontos-grande { font-size: 42px; font-weight: bold; color: #4ade80; margin: 10px 0; }
+        .barra-progresso {
+            width: 100%;
+            height: 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        .barra-preenchida {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #86efac);
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+        .proxima-patente { font-size: 14px; color: #aaa; margin-top: 8px; }
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+        .item-atividade {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-size: 14px;
+        }
+        .item-atividade span { color: #4ade80; font-weight: bold; }
+        .item-atividade .tempo { color: #888; font-size: 12px; margin-left: 8px; }
+
+        .posicao {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.03);
+        }
+        .posicao.meu { background: rgba(34,197,94,0.15); border: 1px solid #22c55e; }
+        .posicao-numero {
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 50%;
+            background: #444;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+        .posicao-1 { background: #f59e0b; color: #1f2937; }
+        .posicao-2 { background: #9ca3af; color: #1f2937; }
+        .posicao-3 { background: #92400e; color: white; }
+        .posicao-nome { flex: 1; font-weight: 500; }
+        .posicao-pontos { font-weight: bold; color: #4ade80; }
+
+        .sem-registro { color: #888; font-style: italic; text-align: center; padding: 15px; }
+
+        .botao {
+            background: #22c55e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        .botao-sair { background: #ef4444; }
+        .botao:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="index.html">🏠 Início</a>
+            <a href="jogos.html">🎮 Desafios</a>
+            <a href="economia.html">💰 Economia</a>
+            <a href="noticias.html">📰 Notícias</a>
+            <a href="dicas.html">💡 Dicas</a>
+            <a href="sobre.html">ℹ️ Sobre</a>
+            <a href="conta.html" class="ativo">👤 Minha Conta</a>
+        </div>
+
+        <h1>👤 Minha Conta</h1>
+
+        <!-- PERFIL -->
+        <div class="card">
+            <div class="perfil-topo">
+                <div class="perfil-nome" id="nomeUsuario">Visitante</div>
+                <div class="patente patente-aprendiz" id="patenteUsuario">Aprendiz Consciente</div>
+                <div class="pontos-grande" id="pontosUsuario">0</div>
+                <p>pontos acumulados</p>
+                <div class="barra-progresso">
+                    <div class="barra-preenchida" id="barraProgresso" style="width: 0%;"></div>
+                </div>
+                <div class="proxima-patente" id="textoProxima">Próxima patente: Caçador de Desperdício — 500 pontos</div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <!-- ATIVIDADES RECENTES -->
+            <div class="card">
+                <h2>📋 Atividades Recentes</h2>
+                <div id="listaAtividades">
+                    <p class="sem-registro">Nenhuma atividade ainda. Jogue os jogos para ganhar pontos!</p>
+                </div>
+            </div>
+
+            <!-- RANKING -->
+            <div class="card">
+                <h2>🏆 Ranking da Comunidade</h2>
+                <div id="listaRanking">
+                    <p class="sem-registro">Carregando ranking...</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 10px;">
+            <button class="botao botao-sair" onclick="sair()">🚪 Sair da Conta</button>
+        </div>
+    </div>
+
+    <script>
+        // ========== SISTEMA DE DADOS ==========
+        const PATENTES = [
+            { nome: 'Aprendiz Consciente', min: 0, max: 499, classe: 'patente-aprendiz' },
+            { nome: 'Caçador de Desperdício', min: 500, max: 1499, classe: 'patente-cacador' },
+            { nome: 'Guerreiro da Natureza', min: 1500, max: 2999, classe: 'patente-guerreiro' },
+            { nome: 'Mestre Jujutsu da Sustentabilidade', min: 3000, max: 999999, classe: 'patente-mestre' }
+        ];
+
+        function getUsuarioLogado() {
+            return JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
+        }
+
+        function getTodosUsuarios() {
+            return JSON.parse(localStorage.getItem('usuarios') || '{}');
+        }
+
+        function salvarDados(usuarios) {
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        }
+
+        function adicionarAtividade(usuarioId, acao, pontosGanhos) {
+            const usuarios = getTodosUsuarios();
+            if (!usuarios[usuarioId]) return;
+            
+            if (!usuarios[usuarioId].atividades) {
+                usuarios[usuarioId].atividades = [];
+            }
+            
+            usuarios[usuarioId].atividades.unshift({
+                acao: acao,
+                pontos: pontosGanhos,
+                data: new Date().toLocaleString('pt-BR')
+            });
+            
+            // Mantém só as últimas 10 atividades
+            usuarios[usuarioId].atividades = usuarios[usuarioId].atividades.slice(0, 10);
+            
+            salvarDados(usuarios);
+        }
+
+        function calcularPatente(pontos) {
+            for (let i = PATENTES.length - 1; i >= 0; i--) {
+                if (pontos >= PATENTES[i].min) return PATENTES[i];
+            }
+            return PATENTES[0];
+        }
+
+        function atualizarInterface() {
+            const usuario = getUsuarioLogado();
+            if (!usuario) {
+                document.getElementById('nomeUsuario').textContent = 'Visitante';
+                document.getElementById('pontosUsuario').textContent = '0';
+                document.getElementById('patenteUsuario').textContent = 'Faça login';
+                document.getElementById('listaAtividades').innerHTML = '<p class="sem-registro">Faça login para ver suas atividades.</p>';
+                document.getElementById('listaRanking').innerHTML = '<p class="sem-registro">Faça login para ver o ranking.</p>';
+                return;
+            }
+
+            const usuarios = getTodosUsuarios();
+            const dados = usuarios[usuario.email];
+            const pontos = dados.pontos || 0;
+            const patente = calcularPatente(pontos);
+            
+            // Nome e pontos
+            document.getElementById('nomeUsuario').textContent = dados.nome || usuario.email.split('@')[0];
+            document.getElementById('pontosUsuario').textContent = pontos;
+            
+            // Patente
+            const elPatente = document.getElementById('patenteUsuario');
+            elPatente.textContent = patente.nome;
+            elPatente.className = 'patente ' + patente.classe;
+            
+            // Barra de progresso
+            const proxima = PATENTES[PATENTES.indexOf(patente) + 1];
+            const elBarra = document.getElementById('barraProgresso');
+            const elTexto = document.getElementById('textoProxima');
+            
+            if (proxima) {
+                const total = proxima.min - patente.min;
+                const atual = pontos - patente.min;
+                const porcentagem = Math.min(100, (atual / total) * 100);
+                elBarra.style.width = porcentagem + '%';
+                elTexto.textContent = `Próxima patente: ${proxima.nome} — ${proxima.min - pontos} pontos`;
+            } else {
+                elBarra.style.width = '100%';
+                elTexto.textContent = '🏆 Você já alcançou a patente máxima! Parabéns!';
+            }
+            
+            // Atividades recentes
+            const elAtividades = document.getElementById('listaAtividades');
+            if (dados.atividades && dados.atividades.length > 0) {
+                elAtividades.innerHTML = dados.atividades.map(a => 
+                    `<div class="item-atividade">${a.acao} <span>+${a.pontos} pts</span><span class="tempo">${a.data}</span></div>`
+                ).join('');
+            } else {
+                elAtividades.innerHTML = '<p class="sem-registro">Nenhuma atividade ainda. Jogue os jogos para ganhar pontos!</p>';
+            }
+            
+            // Ranking
+            atualizarRanking(usuarios, usuario.email);
+        }
+
+        function atualizarRanking(usuarios, meuEmail) {
+            const lista = Object.values(usuarios)
+                .sort((a, b) => (b.pontos || 0) - (a.pontos || 0))
+                .slice(0, 10); // Top 10
+            
+            const elRanking = document.getElementById('listaRanking');
+            
+            if (lista.length === 0) {
+                elRanking.innerHTML = '<p class="sem-registro">Seja o primeiro a acumular pontos!</p>';
+                return;
+            }
+            
+            elRanking.innerHTML = lista.map((u, i) => {
+                let classePosicao = '';
+                if (i === 0) classePosicao = 'posicao-1';
+                else if (i === 1) classePosicao = 'posicao-2';
+                else if (i === 2) classePosicao = 'posicao-3';
+                
+                let ehMeu = u.email === meuEmail ? 'meu' : '';
+                
+                return `
+                    <div class="posicao ${ehMeu}">
+                        <div class="posicao-numero ${classePosicao}">${i + 1}</div>
+                        <div class="posicao-nome">${u.nome || u.email.split('@')[0]}</div>
+                        <div class="posicao-pontos">${u.pontos || 0}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function sair() {
+            localStorage.removeItem('usuarioLogado');
+            window.location.href = 'index.html';
+        }
+
+        // Atualiza tudo ao carregar
+        atualizarInterface();
+        
+        // Atualiza de novo quando a aba fica visível (caso ganhe pontos em outra aba)
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) atualizarInterface();
+        });
+    </script>
+</body>
+</html>

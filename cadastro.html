@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro — Jornada da Sustentabilidade</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+body {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5364 100%);
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container { width: 100%; max-width: 500px; }
+.voltar {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+.voltar:hover { text-decoration: underline; }
+h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+}
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.card h2 {
+    text-align: center;
+    color: #1e3a5f;
+    margin-bottom: 25px;
+    font-size: 1.3rem;
+}
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #444;
+}
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+input:focus { outline: none; border-color: #27ae60; }
+.termos {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 15px 0 20px 0;
+}
+.termos input { width: auto; margin-top: 3px; margin-bottom: 0; }
+.termos label { font-size: 0.9rem; font-weight: normal; }
+button {
+    width: 100%;
+    padding: 14px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+button:hover { background: #219653; }
+.sucesso {
+    margin-top: 15px;
+    padding: 15px;
+    background: #e8f8f5;
+    border-left: 4px solid #27ae60;
+    border-radius: 0 6px 6px 0;
+    color: #155724;
+    display: none;
+}
+.link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+.link a {
+    color: #27ae60;
+    text-decoration: none;
+    font-weight: 500;
+}
+.link a:hover { text-decoration: underline; }
+
+@media (max-width: 480px) {
+    body { padding: 15px; }
+    .card { padding: 25px 18px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="voltar">← Voltar para a página inicial</a>
+    
+    <h1>📝 Crie sua Conta</h1>
+    
+    <div class="card">
+        <h2>Junte-se a nós! 🌿</h2>
+        
+        <div id="mensagemSucesso" class="sucesso">
+            <strong>🎉 Conta criada com sucesso!</strong><br>
+            Você será redirecionado para a página de login em instantes...
+        </div>
+        
+        <form id="formCadastro">
+            <label for="nome">Nome Completo</label>
+            <input type="text" id="nome" placeholder="Seu nome completo" required>
+            
+            <label for="email">Seu melhor e-mail</label>
+            <input type="email" id="email" placeholder="exemplo@email.com" required>
+            
+            <label for="senha">Crie uma senha</label>
+            <input type="password" id="senha" placeholder="Mínimo 6 caracteres" required>
+            
+            <label for="cidade">Cidade / Estado</label>
+            <input type="text" id="cidade" placeholder="Ex: Ubá - MG">
+            
+            <div class="termos">
+                <input type="checkbox" id="aceito" required>
+                <label for="aceito">Li e concordo com as regras e termos de uso</label>
+            </div>
+            
+            <button type="submit">✅ Criar minha conta</button>
+        </form>
+        
+        <div class="link">
+            Já tem conta? <a href="login.html">Fazer login</a>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('formCadastro').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('email').value;
+    
+    // Salva os dados do usuário
+    localStorage.setItem('usuario', email);
+    
+    // Mostra mensagem de sucesso
+    document.getElementById('mensagemSucesso').style.display = 'block';
+    
+    // Redireciona para login após 2 segundos
+    setTimeout(function() {
+        window.location.href = 'login.html';
+    }, 2000);
+});
+</script>
+</body>
+</html>
